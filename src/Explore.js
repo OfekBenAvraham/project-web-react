@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 const Explore = () => {
   const [categories, setCategories] = useState([]);
 
+  const handleCategoryClick = (categoryId) => {
+    localStorage.setItem("selectedCategoryId", categoryId);
+  };
+
   useEffect(() => {
     fetch("https://project-web-psi.vercel.app/category", {
       method: "GET",
@@ -40,7 +44,8 @@ const Explore = () => {
           {categories.map((category) => (
             <Link
               key={category._id}
-              to={`/forum/${category.name}`}
+              to={`/forum/${category._id}`}
+              onClick={() => handleCategoryClick(category._id)}
               className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80"
             >
               <img

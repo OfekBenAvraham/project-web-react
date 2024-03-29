@@ -8,6 +8,7 @@ import Explore from "./Explore";
 import About from "./About";
 import Forum from "./Forum";
 import ShowPost from "./ShowPost";
+import CreatePost from "./CreatePost";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -48,9 +49,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="explore" element={<Explore />} />
-        <Route path="/forum/:categoryName" element={<Forum />} />
+        <Route path="/forum/:categoryId" element={<Forum />} />
         <Route path="/showPost/:postId" element={<ShowPost />} />
-        <Route path="/CreatePost/:categoryId" element={<ShowPost />} />
+        <Route path="/CreatePost/:categoryId" element={<CreatePost />} />
       </Routes>
     </BrowserRouter>
   );

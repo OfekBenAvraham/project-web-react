@@ -2,29 +2,42 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const Forum = () => {
-  const { categoryName } = useParams();
+  const { categoryId } = useParams();
   const [posts, setPosts] = useState([]);
-
+  let category = null;
   useEffect(() => {
-    fetch("https://project-web-psi.vercel.app/post/category", {
-      method: "POST",
+    fetch(`https://project-web-psi.vercel.app/category/${categoryId}`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: categoryName }),
     })
       .then((response) => response.json())
       .then((data) => {
-        setPosts(data);
+        category = data;
+        fetch("https://project-web-psi.vercel.app/post/category/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: category.name }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setPosts(data);
+          })
+          .catch((error) => console.error("Error fetching posts:", error));
+
+        console.log(category);
       })
       .catch((error) => console.error("Error fetching posts:", error));
-  }, [categoryName]);
+  }, [categoryId]);
 
   return (
     <div className="container mx-auto mt-12 p-6">
       <div className="text-center p-10 items-center">
         <a
-          href="./CreatePost"
+          href={`../CreatePost/${categoryId}`}
           className="cursor-pointer m- bg-orange-light hover:bg-orange-100 text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center border border-orange-500 mt-4 transition-colors duration-300"
         >
           <svg
@@ -32,11 +45,11 @@ const Forum = () => {
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" />
             <line x1="12" y1="5" x2="12" y2="19" />

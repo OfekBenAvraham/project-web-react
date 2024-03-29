@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
 const CreatePost = () => {
+  const { categoryId } = useParams();
+
   const [post, setPost] = useState({
     projectName: "",
     description: "",
-    category: {},
     materials: "",
+    categoryId,
     process: "",
     hashtags: "",
     image: "",
@@ -17,8 +20,6 @@ const CreatePost = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const savedCategoryChoice = localStorage.getItem("userCategoryChoice");
-    const categoryChoice = JSON.parse(savedCategoryChoice);
     const { projectName, description, materials, process, hashtags, image } =
       post;
     const tags = hashtags.split(",");
@@ -34,15 +35,15 @@ const CreatePost = () => {
         description,
         materials,
         process,
-        category: categoryChoice.id,
         tags,
+        category: categoryId,
         imageUrl: image,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        window.location.href = "./explore.html";
+        window.location.href = `../forum/${categoryId}`;
       })
       .catch((error) => {
         console.error("Error:", error);
