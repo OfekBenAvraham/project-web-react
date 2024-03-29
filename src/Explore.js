@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Explore = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch('https://project-web-psi.vercel.app/category', {
-      method: 'GET',
+    fetch("https://project-web-psi.vercel.app/category", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((data) => {
         setCategories(data);
       })
-      .catch((error) => console.error('Error fetching categories:', error));
+      .catch((error) => console.error("Error fetching categories:", error));
   }, []);
 
   return (
@@ -32,11 +33,14 @@ const Explore = () => {
             </p>
           </div>
         </div>
-        <div id="categoryContainer" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          id="categoryContainer"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        >
           {categories.map((category) => (
-            <a
+            <Link
               key={category._id}
-              href="./forum.html"
+              to={`/forum/${category.name}`}
               className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80"
             >
               <img
@@ -48,7 +52,7 @@ const Explore = () => {
               <span className="relative ml-4 mb-3 inline-block text-sm text-white md:ml-5 md:text-lg">
                 {category.name}
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
