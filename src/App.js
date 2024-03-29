@@ -25,16 +25,6 @@ function App() {
     setIsAuthenticated(true);
   };
 
-  const handleSignupSuccess = () => {
-    setIsSignupModalOpen(false);
-    setIsAuthenticated(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("userLoginToken");
-    setIsAuthenticated(false);
-  };
-
   return (
     <BrowserRouter>
       <Navbar
@@ -60,6 +50,7 @@ function App() {
         <Route path="explore" element={<Explore />} />
         <Route path="/forum/:categoryName" element={<Forum />} />
         <Route path="/showPost/:postId" element={<ShowPost />} />
+        <Route path="/CreatePost/:categoryId" element={<ShowPost />} />
       </Routes>
     </BrowserRouter>
   );

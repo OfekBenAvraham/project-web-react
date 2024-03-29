@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 
 const ShowPost = () => {
   const { postId } = useParams();
-  const [post, setPost] = useState(null);
-  const [counter, setCounter] = useState(0);
+  const [post, setPost] = useState({ comments: [] }); // Ensure comments property exists
+  const [commentText, setCommentText] = useState("");
 
   useEffect(() => {
     fetch(`https://project-web-psi.vercel.app/post/${postId}`)
@@ -14,6 +14,32 @@ const ShowPost = () => {
       })
       .catch((error) => console.error("Error fetching post details:", error));
   }, [postId]);
+
+  const postComment = () => {
+    const token = localStorage.getItem("userLoginToken");
+    fetch(`https://project-web-psi.vercel.app/comment`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        post: postId,
+        comment: commentText,
+      }),
+    })
+      .then((response) => response.json())
+      .then((newComment) => {
+        setPost((prevPost) => ({
+          ...prevPost,
+          comments: Array.isArray(prevPost.comments)
+            ? [...prevPost.comments, newComment]
+            : [newComment],
+        }));
+        setCommentText("");
+      })
+      .catch((error) => console.error("Error posting comment:", error));
+  };
 
   if (!post) {
     return <div>Loading...</div>;
@@ -34,36 +60,45 @@ const ShowPost = () => {
         <div className="lg:w-1/2">
           <img
             src={post.imageUrl}
-            alt="DIY Project Image"
+            alt="postImage"
             className="w-full h-full object-cover"
           />
         </div>
         <div className="lg:w-1/2 p-8 space-y-6">
           <h1 className="text-4xl font-bold text-orange-600">{post.title}</h1>
           <p className="text-lg">{post.description}</p>
-          <h2 className="text-2xl font-semibold text-orange-500">
-            Materials Needed
-          </h2>
-          <ul className="text-lg">
-            {post.materials.split("\n").map((material, index) => (
-              <li key={index}>{material}</li>
-            ))}
-          </ul>
-          <h2 className="text-2xl font-semibold text-orange-500">Steps</h2>
-          <ol className="text-lg">
-            {post.process.split("\n").map((step, index) => (
-              <li key={index}>{step}</li>
-            ))}
-          </ol>
+          {post.materials && (
+            <>
+              <h2 className="text-2xl font-semibold text-orange-500">
+                Materials Needed
+              </h2>
+              <ul className="text-lg">
+                {post.materials.split("\n").map((material, index) => (
+                  <li key={index}>{material}</li>
+                ))}
+              </ul>
+            </>
+          )}
+          {post.process && (
+            <>
+              <h2 className="text-2xl font-semibold text-orange-500">Steps</h2>
+              <ol className="text-lg">
+                {post.process.split("\n").map((step, index) => (
+                  <li key={index}>{step}</li>
+                ))}
+              </ol>
+            </>
+          )}
           <div className="flex flex-wrap">
-            {post.tags.map((tag, index) => (
-              <span
-                key={index}
-                className="bg-orange-300 text-orange-800 px-4 py-2 rounded-full text-sm mr-2 mb-2"
-              >
-                {tag}
-              </span>
-            ))}
+            {post.tags &&
+              post.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="bg-orange-300 text-orange-800 px-4 py-2 rounded-full text-sm mr-2 mb-2"
+                >
+                  {tag}
+                </span>
+              ))}
           </div>
           <div className="mt-6 space-y-4">
             <h2 className="text-2xl font-semibold">Comments</h2>
@@ -71,8 +106,13 @@ const ShowPost = () => {
               className="w-full rounded-lg border-gray-300 p-4 text-lg"
               placeholder="Add a comment..."
               rows="3"
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)} // Event handler to update commentText state
             ></textarea>
-            <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg text-lg">
+            <button
+              onClick={postComment}
+              className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg text-lg"
+            >
               Post Comment
             </button>
             <div className="space-y-4">
