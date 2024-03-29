@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const Navbar = () => {
+const Navbar = ({ onLoginClick, onSignupClick }) => {
   const toggleDarkMode = () => {
     document.documentElement.classList.toggle("dark");
   };
@@ -42,12 +42,14 @@ const Navbar = () => {
         <div className="hidden items-center justify-center gap-6 md:flex">
           <a
             href="#"
+            onClick={onLoginClick}
             className="font-dm text-sm font-medium text-slate-700 dark:text-slate-200"
           >
             Login
           </a>
           <a
             href="#"
+            onClick={onSignupClick}
             className="rounded-md bg-gradient-to-br from-orange-600 to-orange-400 px-3 py-1.5 font-dm text-sm font-medium text-white shadow-md transition-transform duration-200 ease-in-out hover:scale-[1.03]"
           >
             Sign up
