@@ -87,15 +87,6 @@ const ShowPost = () => {
           </div>
         </div>
       </div>
-      <div className="text-center my-4">
-        <button
-          onClick={() => setCounter(counter + 1)}
-          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg text-lg"
-        >
-          Like Post
-        </button>
-        <p className="mt-2">Likes: {counter}</p>
-      </div>
     </div>
   );
 };
