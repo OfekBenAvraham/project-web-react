@@ -31,7 +31,9 @@ const Forum = () => {
             key={post._id}
             className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl m-4"
           >
-            <Link to={`/showpost/${post._id}`}>
+            <Link to={`/showPost/${post._id}`}>
+              {" "}
+              {/* Link to the ShowPost component */}
               <img
                 src={post.imageUrl}
                 alt="Product"

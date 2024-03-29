@@ -7,6 +7,7 @@ import SignupModal from "./SignupModal";
 import Explore from "./Explore";
 import About from "./About";
 import Forum from "./Forum";
+import ShowPost from "./ShowPost";
 
 function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -31,6 +32,7 @@ function App() {
         <Route path="about" element={<About />} />
         <Route path="explore" element={<Explore />}></Route>
         <Route path="/forum/:categoryName" element={<Forum />} />
+        <Route path="/showPost/:postId" element={<ShowPost />}></Route>
       </Routes>
     </BrowserRouter>
   );

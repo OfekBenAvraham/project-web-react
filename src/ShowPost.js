@@ -1,42 +1,32 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 const ShowPost = () => {
-  const [post, setPost] = useState({
-    title: "Beach Style Decor",
-    imageUrl:
-      "https://images.unsplash.com/photo-1616593969747-4797dc75033e?q=80&w=3840&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description:
-      "Transform your home with this beach style decor project. It's perfect for bringing a bit of summer into any space!",
-    materials: "Sea shells, Driftwood, String lights",
-    steps:
-      "Arrange sea shells and driftwood on a wooden board., Wrap the string lights around the arrangement., Hang the decor piece on a wall to add a beach vibe to your room.",
-    tags: ["#BeachDecor", "#DIYProject"],
-    comments: [
-      {
-        author: "Alex",
-        text: "Love this beach style decor idea! Can't wait to try it out.",
-      },
-      {
-        author: "Jordan",
-        text: "Just finished making this for my living room, and it looks fantastic. Thanks for the inspiration!",
-      },
-    ],
-  });
+  const { postId } = useParams();
+  const [post, setPost] = useState(null);
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    // Fetch post details from API
-    // setPost(responseData);
-  }, []);
+    fetch(`https://project-web-psi.vercel.app/post/${postId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPost(data);
+      })
+      .catch((error) => console.error("Error fetching post details:", error));
+  }, [postId]);
+
+  if (!post) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto mt-12 p-6">
       <div className="text-lg text-center">
-        <a href="./explore.html" className="hover:underline">
+        <a href="/explore" className="hover:underline">
           explore
         </a>
         <span>&lt;</span>
-        <a href="./forum.html" className="hover:underline">
+        <a href="/forum" className="hover:underline">
           decor
         </a>
       </div>
@@ -55,20 +45,20 @@ const ShowPost = () => {
             Materials Needed
           </h2>
           <ul className="text-lg">
-            {post.materials.split(", ").map((material) => (
-              <li key={material}>{material}</li>
+            {post.materials.split("\n").map((material, index) => (
+              <li key={index}>{material}</li>
             ))}
           </ul>
           <h2 className="text-2xl font-semibold text-orange-500">Steps</h2>
           <ol className="text-lg">
-            {post.steps.split(", ").map((step, index) => (
+            {post.process.split("\n").map((step, index) => (
               <li key={index}>{step}</li>
             ))}
           </ol>
           <div className="flex flex-wrap">
-            {post.tags.map((tag) => (
+            {post.tags.map((tag, index) => (
               <span
-                key={tag}
+                key={index}
                 className="bg-orange-300 text-orange-800 px-4 py-2 rounded-full text-sm mr-2 mb-2"
               >
                 {tag}
@@ -86,12 +76,13 @@ const ShowPost = () => {
               Post Comment
             </button>
             <div className="space-y-4">
-              {post.comments.map((comment) => (
-                <div key={comment.author} className="bg-gray-50 p-4 rounded-lg">
-                  <p className="font-semibold">{comment.author}</p>
-                  <p>{comment.text}</p>
-                </div>
-              ))}
+              {post.comments &&
+                post.comments.map((comment, index) => (
+                  <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                    <p className="font-semibold">{comment.author}</p>
+                    <p>{comment.text}</p>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
