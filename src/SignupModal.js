@@ -8,9 +8,29 @@ const SignupModal = ({ isOpen, onClose }) => {
 
   const handleSignup = (event) => {
     event.preventDefault();
-    console.log('Signing up with:', firstName, lastName, email, password);
-    onClose(); 
+  
+    fetch("https://project-web-psi.vercel.app/user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstName, lastName, email, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.message) {
+          console.log(data);
+          onClose(); // Close the modal
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred while signing up.");
+      });
   };
+  
 
   if (!isOpen) return null;
 

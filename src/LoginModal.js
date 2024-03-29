@@ -1,14 +1,35 @@
 import React, { useState } from 'react';
 
-const LoginModal = ({ isOpen, onClose }) => {
+const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = (event) => {
     event.preventDefault();
-    console.log('Logging in with:', email, password);
-    onClose();
+  
+    fetch("https://project-web-psi.vercel.app/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.access_token) {
+          localStorage.setItem('userLoginToken', data.access_token);
+          onLoginSuccess(); // Call the callback function
+          onClose(); // Close the modal
+        } else {
+          alert('Incorrect email or password.');
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        alert("An error occurred while logging in.");
+      });
   };
+  
 
   if (!isOpen) return null;
 
