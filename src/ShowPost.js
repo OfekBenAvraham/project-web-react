@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 const ShowPost = () => {
   const { postId } = useParams();
@@ -64,15 +66,15 @@ const ShowPost = () => {
   };
 
   return (
-    <div className="container mx-auto mt-12 p-6">
-      <div className="text-lg text-center">
-        <a href="/explore" className="hover:underline dark:text-zinc-100">
-          explore
-        </a>
+    <div className="container min-h-screen mx-auto mt-12 p-6">
+      <div className="text-lg flex justify-center">
+        <Link to={`../explore`}>
+          <p className="dark:text-zinc-100">explore</p>
+        </Link>
         <span className="dark:text-zinc-100">&lt;</span>
-        <a href="/forum" className="hover:underline dark:text-zinc-100">
-          decor
-        </a>
+        <Link to={`../explore`}>
+          <p className="dark:text-zinc-100">decor</p>
+        </Link>
       </div>
       <div className="flex flex-wrap lg:flex-nowrap bg-white rounded-xl shadow-xl overflow-hidden dark:bg-gray-700">
         <div className="lg:w-1/2">

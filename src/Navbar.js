@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = ({
   onLoginClick,
@@ -38,13 +39,19 @@ const Navbar = ({
           } items-center justify-end gap-6 md:flex flex-col md:flex-row`}
         >
           <li className="pt-1.5 font-dm text-sm font-medium text-slate-700  dark:text-slate-200">
-            <a href="/">Home</a>
+            <Link to={`/`}>
+              Home
+            </Link>
           </li>
           <li className="pt-1.5 font-dm text-sm font-medium text-slate-700  dark:text-slate-200">
-            <a href="/explore">Explore</a>
+            <Link to={`/explore`}>
+              Explore
+            </Link>
           </li>
           <li className="pt-1.5 font-dm text-sm font-medium text-slate-700  dark:text-slate-200">
-            <a href="/about">About</a>
+            <Link to={`/about`}>
+              About
+            </Link>
           </li>
           {!isAuthenticated && (
             <>
