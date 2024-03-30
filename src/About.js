@@ -1,4 +1,9 @@
 import React from "react";
+import GuyAvatar from './assets/GuyAvatar.jpeg';
+import Mor from './assets/Mor.jpeg';
+import OfekAvatar from './assets/OfekAvatar.png';
+import Rotem from './assets/Rotem.jpeg';
+import Maayan from './assets/Maayan.jpeg';
 
 const About = () => {
   return (
@@ -81,12 +86,12 @@ const About = () => {
               <div className="p-5 pb-6 flex justify-center flex-col items-center">
                 <img
                   className="md:block hidden"
-                  src="./assets/GuyAvatar.jpeg"
+                  src={GuyAvatar}
                   alt="Guy Avatar"
                 />
                 <img
                   className="md:hidden block"
-                  src="./assets/GuyAvatar.jpeg"
+                  src={GuyAvatar}
                   alt="Guy Avatar"
                 />
                 <p className="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">
@@ -96,12 +101,12 @@ const About = () => {
               <div className="p-5 pb-6 flex justify-center flex-col items-center">
                 <img
                   className="md:block hidden"
-                  src="./assets/Mor.jpeg"
+                  src={Mor}
                   alt="Mor Avatar"
                 />
                 <img
                   className="md:hidden block"
-                  src="./assets/Mor.jpeg"
+                  src={Mor}
                   alt="Mor Avatar"
                 />
                 <p className="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">
@@ -111,12 +116,12 @@ const About = () => {
               <div className="p-5 pb-6 flex justify-center flex-col items-center">
                 <img
                   className="md:block hidden"
-                  src="./assets/OfekAvatar.jpeg"
+                  src={OfekAvatar}
                   alt="Ofek Avatar"
                 />
                 <img
                   className="md:hidden block"
-                  src="./assets/OfekAvatar.jpeg"
+                  src={OfekAvatar}
                   alt="Ofek Avatar"
                 />
                 <p className="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">
@@ -126,12 +131,12 @@ const About = () => {
               <div className="p-5 pb-6 flex justify-center flex-col items-center">
                 <img
                   className="md:block hidden"
-                  src="./assets/Rotem.jpeg"
+                  src={Rotem}
                   alt="Rotem Avatar"
                 />
                 <img
                   className="md:hidden block"
-                  src="./assets/Rotem.jpeg"
+                  src={Rotem}
                   alt="Rotem Avatar"
                 />
                 <p className="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">
@@ -141,12 +146,12 @@ const About = () => {
               <div className="p-5 pb-6 flex justify-center flex-col items-center">
                 <img
                   className="md:block hidden"
-                  src="./assets/Maayan.jpeg"
+                  src={Maayan}
                   alt="Maayan Avatar"
                 />
                 <img
                   className="md:hidden block"
-                  src="./assets/Maayan.jpeg"
+                  src={Maayan}
                   alt="Maayan Avatar"
                 />
                 <p className="font-medium text-xl leading-5 text-gray-800 dark:text-white mt-4">
