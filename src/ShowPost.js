@@ -66,15 +66,15 @@ const ShowPost = () => {
   return (
     <div className="container mx-auto mt-12 p-6">
       <div className="text-lg text-center">
-        <a href="/explore" className="hover:underline">
+        <a href="/explore" className="hover:underline dark:text-zinc-100">
           explore
         </a>
-        <span>&lt;</span>
-        <a href="/forum" className="hover:underline">
+        <span className="dark:text-zinc-100">&lt;</span>
+        <a href="/forum" className="hover:underline dark:text-zinc-100">
           decor
         </a>
       </div>
-      <div className="flex flex-wrap lg:flex-nowrap bg-white rounded-xl shadow-xl overflow-hidden">
+      <div className="flex flex-wrap lg:flex-nowrap bg-white rounded-xl shadow-xl overflow-hidden dark:bg-gray-700">
         <div className="lg:w-1/2">
           <img
             src={post.imageUrl}
@@ -83,14 +83,14 @@ const ShowPost = () => {
           />
         </div>
         <div className="lg:w-1/2 p-8 space-y-6">
-          <h1 className="text-4xl font-bold text-orange-600">{post.title}</h1>
-          <p className="text-lg">{post.description}</p>
+          <h1 className="text-4xl font-bold text-orange-600 ">{post.title}</h1>
+          <p className="text-lg dark:text-zinc-100">{post.description}</p>
           {post.materials && (
             <>
               <h2 className="text-2xl font-semibold text-orange-500">
                 Materials Needed
               </h2>
-              <ul className="text-lg">
+              <ul className="text-lg dark:text-zinc-100">
                 {post.materials.split("\n").map((material, index) => (
                   <li key={index}>{material}</li>
                 ))}
@@ -100,7 +100,7 @@ const ShowPost = () => {
           {post.process && (
             <>
               <h2 className="text-2xl font-semibold text-orange-500">Steps</h2>
-              <ol className="text-lg">
+              <ol className="text-lg dark:text-zinc-100">
                 {post.process.split("\n").map((step, index) => (
                   <li key={index}>{step}</li>
                 ))}
@@ -120,11 +120,16 @@ const ShowPost = () => {
           </div>
 
           <div className="mt-6 space-y-4">
-            <h2 className="text-2xl font-semibold">Comments</h2>
+            <h2 className="text-2xl font-semibold dark:text-zinc-100">
+              Comments
+            </h2>
             <div className="space-y-4">
               {post.comments &&
                 post.comments.map((comment, index) => (
-                  <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                  <div
+                    key={index}
+                    className="bg-gray-50 p-4 rounded-lg dark:bg-slate-400"
+                  >
                     <p className="items-center mr-3 text-md text-gray-900 dark:text-white font-semibold">
                       {comment &&
                         comment.user.firstName + " " + comment.user.lastName}
@@ -134,7 +139,7 @@ const ShowPost = () => {
                 ))}
             </div>
             <textarea
-              className="w-full rounded-lg border-gray-300 p-4 text-lg"
+              className="w-full rounded-lg border-gray-300 p-4 text-lg dark:bg-slate-500"
               placeholder="Add a comment..."
               rows="3"
               value={commentText}

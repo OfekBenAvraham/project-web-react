@@ -33,11 +33,11 @@ const Forum = ({ isDarkMode }) => {
   }, [categoryId]);
 
   return (
-    <div className={`container mx-auto mt-12 p-6 ${isDarkMode ? "dark" : ""}`}>
+    <div className={`container mx-auto mt-12 p-6 dark:bg-gray-800`}>
       <div className="text-center p-10 items-center">
         <Link
           to={`../CreatePost/${categoryId}`}
-          className="cursor-pointer m- bg-orange-light hover:bg-orange-100 text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center border border-orange-500 mt-4 transition-colors duration-300"
+          className="cursor-pointer m- bg-orange-light hover:bg-orange-100 text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center border border-orange-500 mt-4 transition-colors duration-300 dark:bg-neutral-800 dark:text-zinc-100"
         >
           <svg
             className="h-8 w-8 text-orange-500 transition-colors duration-300"
@@ -64,7 +64,7 @@ const Forum = ({ isDarkMode }) => {
         {posts.map((post) => (
           <div
             key={post._id}
-            className={`w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl m-4 ${
+            className={`w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl m-4 dark:bg-gray-700  ${
               isDarkMode ? "dark" : ""
             }`}
           >
@@ -79,10 +79,10 @@ const Forum = ({ isDarkMode }) => {
               <span className="text-gray-400 mr-3 uppercase text-xs">
                 {post.author}
               </span>
-              <p className="text-lg font-bold text-black truncate block capitalize">
+              <p className="text-lg font-bold text-black truncate block capitalize dark:text-zinc-200">
                 {post.title}
               </p>
-              <p className="text-md font-semibold text-black cursor-auto my-3">
+              <p className="text-md font-semibold text-black cursor-auto my-3 dark:text-zinc-200">
                 {post.description}
               </p>
             </div>

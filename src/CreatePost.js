@@ -42,7 +42,6 @@ const CreatePost = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        
         window.location.href = `../forum/${categoryId}`;
       })
       .catch((error) => {
@@ -51,7 +50,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="container mx-auto mt-8 p-4 bg-white p-8 rounded shadow-md">
+    <div className="container  h-full mx-auto mt-8 p-4 bg-white p-8 rounded shadow-md dark:bg-gray-600">
       <h1 className="text-5xl font-semibold mb-4 text-center text-orange-400">
         Share Your New DIY!
       </h1>
@@ -59,13 +58,13 @@ const CreatePost = () => {
         onSubmit={handleSubmit}
         method="post"
         id="postForm"
-        enctype="multipart/form-data"
+        encType="multipart/form-data"
       >
-        <div className="space-y-4">
+        <div className="space-y-4 ">
           <div>
             <label
-              for="projectName"
-              className="block text-gray-700 text-sm font-medium mb-2"
+              htmlFor="projectName"
+              className="block text-gray-700 text-sm font-medium mb-2 dark:text-zinc-100"
             >
               Project Name:
             </label>
@@ -75,7 +74,7 @@ const CreatePost = () => {
               name="projectName"
               maxLength="300"
               required
-              className="w-full border border-orange-400 p-2 rounded general-input"
+              className="w-full border border-orange-400 p-2 rounded general-input dark:text-zinc-100 dark:bg-slate-500"
               value={post.projectName}
               onChange={handleChange}
             />
@@ -83,8 +82,8 @@ const CreatePost = () => {
 
           <div>
             <label
-              for="description"
-              className="block text-gray-700 text-sm font-medium mb-2"
+              htmlFor="description"
+              className="block text-gray-700 text-sm font-medium mb-2 dark:text-zinc-100"
             >
               Description:
             </label>
@@ -93,7 +92,7 @@ const CreatePost = () => {
               name="description"
               rows="3"
               required
-              className="w-full border border-orange-400 p-2 rounded general-input"
+              className="w-full border border-orange-400 p-2 rounded general-input dark:text-zinc-100 dark:bg-slate-500"
               value={post.description}
               onChange={handleChange}
             ></textarea>
@@ -101,8 +100,8 @@ const CreatePost = () => {
 
           <div>
             <label
-              for="materials"
-              className="block text-gray-700 text-sm font-medium mb-2"
+              htmlFor="materials"
+              className="block text-gray-700 text-sm font-medium mb-2 dark:text-zinc-100"
             >
               Materials:
             </label>
@@ -111,7 +110,7 @@ const CreatePost = () => {
               name="materials"
               rows="3"
               required
-              className="w-full border border-orange-400 p-2 rounded general-input"
+              className="w-full border border-orange-400 p-2 rounded general-input dark:text-zinc-100 dark:bg-slate-500"
               value={post.materials}
               onChange={handleChange}
             ></textarea>
@@ -120,7 +119,7 @@ const CreatePost = () => {
           <div>
             <label
               for="process"
-              className="block text-gray-700 text-sm font-medium mb-2"
+              className="block text-gray-700 text-sm font-medium mb- dark:text-zinc-100"
             >
               Describe your process:
             </label>
@@ -129,7 +128,7 @@ const CreatePost = () => {
               name="process"
               rows="3"
               required
-              className="w-full border border-orange-400 p-2 rounded general-input"
+              className="w-full border border-orange-400 p-2 rounded general-input dark:text-zinc-100 dark:bg-slate-500"
               value={post.process}
               onChange={handleChange}
             ></textarea>
@@ -138,7 +137,7 @@ const CreatePost = () => {
           <div>
             <label
               for="hashtags"
-              className="block text-gray-700 text-sm font-medium mb-2"
+              className="block text-gray-700 text-sm font-medium mb-2 dark:text-zinc-100"
             >
               Hashtags (comma-separated):
             </label>
@@ -146,7 +145,7 @@ const CreatePost = () => {
               type="text"
               id="hashtags"
               name="hashtags"
-              className="w-full border border-orange-400 p-2 rounded general-input"
+              className="w-full border border-orange-400 p-2 rounded general-input dark:text-zinc-100 dark:bg-slate-500"
               required
               value={post.hashtags}
               onChange={handleChange}
@@ -155,8 +154,8 @@ const CreatePost = () => {
 
           <div className="mb-4">
             <label
-              for="image"
-              className="block text-gray-700 text-sm font-medium mb-2"
+              htmlFor="image"
+              className="block text-gray-700 text-sm font-medium mb-2 dark:text-zinc-100"
             >
               Upload Image:
             </label>
@@ -164,7 +163,7 @@ const CreatePost = () => {
               type="text"
               id="image"
               name="image"
-              className="w-full border border-orange-400 p-2 rounded general-input"
+              className="w-full border border-orange-400 p-2 rounded general-input dark:text-zinc-100 dark:bg-slate-500"
               value={post.image}
               onChange={handleChange}
             />

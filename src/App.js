@@ -50,13 +50,13 @@ function App() {
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
-    // Toggle dark mode class on root element
-    document.documentElement.classList.toggle("dark", isDarkMode);
+    console.log("App's darkmode");
+    document.documentElement.classList.toggle("dark", !isDarkMode);
   };
 
   return (
     <BrowserRouter>
-      <div className={`App ${isDarkMode ? "dark" : ""}`}>
+      <div className="App dark:bg-gray-800">
         <Navbar
           onLoginClick={() => setIsLoginModalOpen(true)}
           onSignupClick={() => setIsSignupModalOpen(true)}

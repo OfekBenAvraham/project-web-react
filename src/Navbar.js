@@ -13,7 +13,9 @@ const Navbar = ({
     setIsOpen(!isOpen);
   };
   const toggleDarkMode = () => {
-    document.documentElement.classList.toggle("dark");
+    console.log("dark mode toggle");
+    onToggleDarkMode();
+    // document.documentElement.classList.toggle("dark");
   };
 
   return (
