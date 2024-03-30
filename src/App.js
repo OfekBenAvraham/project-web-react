@@ -20,17 +20,29 @@ function App() {
     const token = localStorage.getItem("userLoginToken");
     setIsAuthenticated(!!token);
 
+    let isNavigatingWithinSite = false;
+
+    // handles logout automatically when user exit.
+    const handleBeforeUnload = (event) => {
+      if (!isNavigatingWithinSite) {
+        // Clear authentication token from localStorage only if not navigating within the site
+        localStorage.removeItem("userLoginToken");
+      }
+    };
+
+    const handleNavigationWithinSite = () => {
+      isNavigatingWithinSite = true;
+    };
+
     window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("click", handleNavigationWithinSite);
 
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("click", handleNavigationWithinSite);
     };
   }, []);
 
-  const handleBeforeUnload = () => {
-    // Clear authentication token from localStorage when user leaves the page
-    localStorage.removeItem("userLoginToken");
-  };
   const handleLoginSuccess = () => {
     setIsLoginModalOpen(false);
     setIsAuthenticated(true);
@@ -45,8 +57,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className={`App ${isDarkMode ? "dark" : ""}`}>
-        {" "}
-        {/* Add dark class conditionally */}
         <Navbar
           onLoginClick={() => setIsLoginModalOpen(true)}
           onSignupClick={() => setIsSignupModalOpen(true)}

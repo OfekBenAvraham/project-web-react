@@ -8,26 +8,33 @@ const ShowPost = () => {
   const token = localStorage.getItem("userLoginToken");
 
   useEffect(() => {
-    fetch(`https://project-web-psi.vercel.app/post/${postId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setPost(data);
-      })
-      .catch((error) => console.error("Error fetching post details:", error));
-
-    fetch(`https://project-web-psi.vercel.app/comment/${postId}`)
-      .then((response) => response.json())
-      .then((data) => {
+    Promise.all([
+      fetch(`https://project-web-psi.vercel.app/post/${postId}`).then(
+        (response) => response.json()
+      ),
+      fetch(`https://project-web-psi.vercel.app/comment/${postId}`).then(
+        (response) => response.json()
+      ),
+    ])
+      .then(([postData, commentData]) => {
+        setPost(postData);
         setPost((prevPost) => ({
           ...prevPost,
-          comments: data,
+          comments: commentData,
         }));
       })
-      .catch((error) => console.error("Error fetching comments:", error));
-  }, [postId]);
+      .catch((error) =>
+        console.error("Error fetching post and comments:", error)
+      );
+  }, [postId, post.comments]);
 
   const postComment = () => {
     console.log("Posting Comment...");
+    if (!token) {
+      alert("You can't post a comment if you're not logged in!");
+      return;
+    }
+
     fetch(`https://project-web-psi.vercel.app/comment`, {
       method: "POST",
       headers: {
@@ -40,22 +47,21 @@ const ShowPost = () => {
       }),
     })
       .then((response) => {
-        response.json();
-        console.log(response);
+        if (!response.ok) {
+          throw new Error("Failed to post comment");
+        }
+        return response.json();
       })
       .then((newComment) => {
+        // Update comments state directly with the new comment
         setPost((prevPost) => ({
           ...prevPost,
-          comments: [...prevPost.comments, newComment],
+          comments: [...(prevPost.comments || []), newComment],
         }));
         setCommentText("");
       })
       .catch((error) => console.error("Error posting comment:", error));
   };
-
-  if (!post) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="container mx-auto mt-12 p-6">
