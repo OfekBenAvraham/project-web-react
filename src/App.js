@@ -19,40 +19,60 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("userLoginToken");
     setIsAuthenticated(!!token);
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
   }, []);
 
+  const handleBeforeUnload = () => {
+    // Clear authentication token from localStorage when user leaves the page
+    localStorage.removeItem("userLoginToken");
+  };
   const handleLoginSuccess = () => {
     setIsLoginModalOpen(false);
     setIsAuthenticated(true);
   };
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    // Toggle dark mode class on root element
+    document.documentElement.classList.toggle("dark", isDarkMode);
+  };
+
   return (
     <BrowserRouter>
-      <Navbar
-        onLoginClick={() => setIsLoginModalOpen(true)}
-        onSignupClick={() => setIsSignupModalOpen(true)}
-        isAuthenticated={isAuthenticated}
-        onLogoutClick={() => setIsAuthenticated(false)}
-        isDarkMode={isDarkMode}
-        onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
-      />
-      <LoginModal
-        isOpen={isLoginModalOpen}
-        onClose={() => setIsLoginModalOpen(false)}
-        onLoginSuccess={handleLoginSuccess}
-      />
-      <SignupModal
-        isOpen={isSignupModalOpen}
-        onClose={() => setIsSignupModalOpen(false)}
-      />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="explore" element={<Explore />} />
-        <Route path="/forum/:categoryId" element={<Forum />} />
-        <Route path="/showPost/:postId" element={<ShowPost />} />
-        <Route path="/CreatePost/:categoryId" element={<CreatePost />} />
-      </Routes>
+      <div className={`App ${isDarkMode ? "dark" : ""}`}>
+        {" "}
+        {/* Add dark class conditionally */}
+        <Navbar
+          onLoginClick={() => setIsLoginModalOpen(true)}
+          onSignupClick={() => setIsSignupModalOpen(true)}
+          isAuthenticated={isAuthenticated}
+          onLogoutClick={() => setIsAuthenticated(false)}
+          isDarkMode={isDarkMode}
+          onToggleDarkMode={toggleDarkMode}
+        />
+        <LoginModal
+          isOpen={isLoginModalOpen}
+          onClose={() => setIsLoginModalOpen(false)}
+          onLoginSuccess={handleLoginSuccess}
+        />
+        <SignupModal
+          isOpen={isSignupModalOpen}
+          onClose={() => setIsSignupModalOpen(false)}
+        />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="explore" element={<Explore />} />
+          <Route path="/forum/:categoryId" element={<Forum />} />
+          <Route path="/showPost/:postId" element={<ShowPost />} />
+          <Route path="/CreatePost/:categoryId" element={<CreatePost />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }

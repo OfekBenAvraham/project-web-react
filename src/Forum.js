@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-const Forum = () => {
+const Forum = ({ isDarkMode }) => {
   const { categoryId } = useParams();
   const [posts, setPosts] = useState([]);
   let category = null;
+
   useEffect(() => {
     fetch(`https://project-web-psi.vercel.app/category/${categoryId}`, {
       method: "GET",
@@ -27,17 +28,15 @@ const Forum = () => {
             setPosts(data);
           })
           .catch((error) => console.error("Error fetching posts:", error));
-
-        console.log(category);
       })
       .catch((error) => console.error("Error fetching posts:", error));
   }, [categoryId]);
 
   return (
-    <div className="container mx-auto mt-12 p-6">
+    <div className={`container mx-auto mt-12 p-6 ${isDarkMode ? "dark" : ""}`}>
       <div className="text-center p-10 items-center">
-        <a
-          href={`../CreatePost/${categoryId}`}
+        <Link
+          to={`../CreatePost/${categoryId}`}
           className="cursor-pointer m- bg-orange-light hover:bg-orange-100 text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center border border-orange-500 mt-4 transition-colors duration-300"
         >
           <svg
@@ -56,7 +55,7 @@ const Forum = () => {
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
           Create new post
-        </a>
+        </Link>
       </div>
       <div
         id="Projects"
@@ -65,7 +64,9 @@ const Forum = () => {
         {posts.map((post) => (
           <div
             key={post._id}
-            className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl m-4"
+            className={`w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl m-4 ${
+              isDarkMode ? "dark" : ""
+            }`}
           >
             <Link to={`/showPost/${post._id}`}>
               <img

@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 
 const ShowPost = () => {
   const { postId } = useParams();
-  const [post, setPost] = useState({ comments: [] }); // Ensure comments property exists
+  const [post, setPost] = useState({ comments: [] });
   const [commentText, setCommentText] = useState("");
+  const token = localStorage.getItem("userLoginToken");
 
   useEffect(() => {
     fetch(`https://project-web-psi.vercel.app/post/${postId}`)
@@ -13,10 +14,20 @@ const ShowPost = () => {
         setPost(data);
       })
       .catch((error) => console.error("Error fetching post details:", error));
+
+    fetch(`https://project-web-psi.vercel.app/comment/${postId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setPost((prevPost) => ({
+          ...prevPost,
+          comments: data,
+        }));
+      })
+      .catch((error) => console.error("Error fetching comments:", error));
   }, [postId]);
 
   const postComment = () => {
-    const token = localStorage.getItem("userLoginToken");
+    console.log("Posting Comment...");
     fetch(`https://project-web-psi.vercel.app/comment`, {
       method: "POST",
       headers: {
@@ -28,13 +39,14 @@ const ShowPost = () => {
         comment: commentText,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        response.json();
+        console.log(response);
+      })
       .then((newComment) => {
         setPost((prevPost) => ({
           ...prevPost,
-          comments: Array.isArray(prevPost.comments)
-            ? [...prevPost.comments, newComment]
-            : [newComment],
+          comments: [...prevPost.comments, newComment],
         }));
         setCommentText("");
       })
@@ -100,8 +112,21 @@ const ShowPost = () => {
                 </span>
               ))}
           </div>
+
           <div className="mt-6 space-y-4">
             <h2 className="text-2xl font-semibold">Comments</h2>
+            <div className="space-y-4">
+              {post.comments &&
+                post.comments.map((comment, index) => (
+                  <div key={index} className="bg-gray-50 p-4 rounded-lg">
+                    <p className="items-center mr-3 text-md text-gray-900 dark:text-white font-semibold">
+                      {comment &&
+                        comment.user.firstName + " " + comment.user.lastName}
+                    </p>
+                    <p>{comment && comment.comment}</p>
+                  </div>
+                ))}
+            </div>
             <textarea
               className="w-full rounded-lg border-gray-300 p-4 text-lg"
               placeholder="Add a comment..."
@@ -115,15 +140,6 @@ const ShowPost = () => {
             >
               Post Comment
             </button>
-            <div className="space-y-4">
-              {post.comments &&
-                post.comments.map((comment, index) => (
-                  <div key={index} className="bg-gray-50 p-4 rounded-lg">
-                    <p className="font-semibold">{comment.author}</p>
-                    <p>{comment.text}</p>
-                  </div>
-                ))}
-            </div>
           </div>
         </div>
       </div>

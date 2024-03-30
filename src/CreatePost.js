@@ -42,7 +42,7 @@ const CreatePost = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        
         window.location.href = `../forum/${categoryId}`;
       })
       .catch((error) => {

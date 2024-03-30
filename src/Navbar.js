@@ -5,6 +5,7 @@ const Navbar = ({
   onSignupClick,
   isAuthenticated,
   onLogoutClick,
+  onToggleDarkMode,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -161,7 +162,7 @@ const Navbar = ({
             </svg>
           </button>
         </div>
-        <button onClick={toggleDarkMode} className="hidden md:block">
+        <button onClick={onToggleDarkMode} className="hidden md:block">
           {/* Dark mode toggle icons for desktop view */}
           <svg
             className="dark:hidden"
