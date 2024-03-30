@@ -79,7 +79,7 @@ function App() {
           <Route path="about" element={<About />} />
           <Route path="explore" element={<Explore />} />
           <Route path="/forum/:categoryId" element={<Forum />} />
-          <Route path="/showPost/:postId" element={<ShowPost />} />
+          <Route path="/showPost/:categoryId/:postId" element={<ShowPost />} />
           <Route path="/CreatePost/:categoryId" element={<CreatePost />} />
         </Routes>
       </div>

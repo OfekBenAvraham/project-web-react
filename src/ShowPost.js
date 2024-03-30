@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-
 const ShowPost = () => {
+  const { categoryId } = useParams();
   const { postId } = useParams();
   const [post, setPost] = useState({ comments: [] });
   const [commentText, setCommentText] = useState("");
@@ -72,8 +72,8 @@ const ShowPost = () => {
           <p className="dark:text-zinc-100">explore</p>
         </Link>
         <span className="dark:text-zinc-100">&lt;</span>
-        <Link to={`../explore`}>
-          <p className="dark:text-zinc-100">decor</p>
+        <Link to={`../forum/${categoryId}`}>
+          <p className="dark:text-zinc-100">forum</p>
         </Link>
       </div>
       <div className="flex flex-wrap lg:flex-nowrap bg-white rounded-xl shadow-xl overflow-hidden dark:bg-gray-700">

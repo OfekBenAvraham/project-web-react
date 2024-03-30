@@ -20,10 +20,10 @@ const Navbar = ({
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-100 bg-white backdrop-blur-lg dark:bg-slate-800 ">
+    <header className="sticky top-0 z-50 border-b border-slate-100 bg-white backdrop-blur-lg dark:bg-gray-600 ">
       <nav className="mx-auto flex gap-8 px-6 transition-all duration-200 ease-in-out lg:px-12 py-4">
         <div className="relative flex items-center">
-          <a href="./#">
+          <Link to="/">
             <img
               src="https://gpariente.github.io/MakerMingle/assets/MakermingleLogo.png"
               alt="Logo"
@@ -31,7 +31,7 @@ const Navbar = ({
               width="80"
               height="80"
             />
-          </a>
+          </Link>
         </div>
         <ul
           className={`${
@@ -39,19 +39,13 @@ const Navbar = ({
           } items-center justify-end gap-6 md:flex flex-col md:flex-row`}
         >
           <li className="pt-1.5 font-dm text-sm font-medium text-slate-700  dark:text-slate-200">
-            <Link to={`/`}>
-              Home
-            </Link>
+            <Link to={`/`}>Home</Link>
           </li>
           <li className="pt-1.5 font-dm text-sm font-medium text-slate-700  dark:text-slate-200">
-            <Link to={`/explore`}>
-              Explore
-            </Link>
+            <Link to={`/explore`}>Explore</Link>
           </li>
           <li className="pt-1.5 font-dm text-sm font-medium text-slate-700  dark:text-slate-200">
-            <Link to={`/about`}>
-              About
-            </Link>
+            <Link to={`/about`}>About</Link>
           </li>
           {!isAuthenticated && (
             <>

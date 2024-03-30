@@ -33,10 +33,10 @@ const SignupModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40">
-      <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 min-h-[32rem] flex flex-col items-center justify-start relative">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40 ">
+      <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 min-h-[32rem] flex flex-col items-center justify-start relative dark:bg-gray-600">
         <span
-          className="absolute top-4 right-8 cursor-pointer text-2xl text-gray-500"
+          className="absolute top-4 right-8 cursor-pointer text-2xl text-gray-500 dark:text-zinc-100"
           onClick={onClose}
         >
           &times;
@@ -48,7 +48,7 @@ const SignupModal = ({ isOpen, onClose }) => {
           width="140"
           height="140"
         />
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 className="text-2xl font-semibold mb-4 dark:text-zinc-100">
           Welcome to Maker Mingle!
         </h2>
         <form
@@ -58,7 +58,7 @@ const SignupModal = ({ isOpen, onClose }) => {
           <div className="w-full">
             <label
               htmlFor="firstName"
-              className="block text-left text-gray-600 mb-2"
+              className="block text-left text-gray-600 mb-2 dark:text-zinc-100"
             >
               First Name:
             </label>
@@ -73,7 +73,7 @@ const SignupModal = ({ isOpen, onClose }) => {
             />
             <label
               htmlFor="lastName"
-              className="block text-left text-gray-600 mb-2"
+              className="block text-left text-gray-600 mb-2 dark:text-zinc-100"
             >
               Last Name:
             </label>
@@ -88,7 +88,7 @@ const SignupModal = ({ isOpen, onClose }) => {
             />
             <label
               htmlFor="email"
-              className="block text-left text-gray-600 mb-2"
+              className="block text-left text-gray-600 mb-2 dark:text-zinc-100"
             >
               Email:
             </label>
@@ -103,7 +103,7 @@ const SignupModal = ({ isOpen, onClose }) => {
             />
             <label
               htmlFor="password"
-              className="block text-left text-gray-600 mb-2"
+              className="block text-left text-gray-600 mb-2 dark:text-zinc-100"
             >
               Password:
             </label>

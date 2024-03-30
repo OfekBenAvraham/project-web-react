@@ -33,7 +33,9 @@ const Forum = ({ isDarkMode }) => {
   }, [categoryId]);
 
   return (
-    <div className={`container mx-auto min-h-screen mt-12 p-6 dark:bg-gray-800`}>
+    <div
+      className={`container mx-auto min-h-screen mt-12 p-6 dark:bg-gray-800`}
+    >
       <div className="text-center p-10 items-center ">
         <Link
           to={`../CreatePost/${categoryId}`}
@@ -68,7 +70,7 @@ const Forum = ({ isDarkMode }) => {
               isDarkMode ? "dark" : ""
             }`}
           >
-            <Link to={`/showPost/${post._id}`}>
+            <Link to={`/showPost/${categoryId}/${post._id}`}>
               <img
                 src={post.imageUrl}
                 alt="Product"
