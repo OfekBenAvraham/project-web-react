@@ -33,8 +33,8 @@ const Forum = ({ isDarkMode }) => {
   }, [categoryId]);
 
   return (
-    <div className={`container mx-auto mt-12 p-6 dark:bg-gray-800`}>
-      <div className="text-center p-10 items-center">
+    <div className={`container mx-auto min-h-screen mt-12 p-6 dark:bg-gray-800`}>
+      <div className="text-center p-10 items-center ">
         <Link
           to={`../CreatePost/${categoryId}`}
           className="cursor-pointer m- bg-orange-light hover:bg-orange-100 text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center border border-orange-500 mt-4 transition-colors duration-300 dark:bg-neutral-800 dark:text-zinc-100"
@@ -64,7 +64,7 @@ const Forum = ({ isDarkMode }) => {
         {posts.map((post) => (
           <div
             key={post._id}
-            className={`w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl m-4 dark:bg-gray-700  ${
+            className={`w-72 bg-white shadow-md rounded-xl justify-center  mx-auto duration-500 hover:scale-105 hover:shadow-xl m-4 dark:bg-gray-700  ${
               isDarkMode ? "dark" : ""
             }`}
           >
