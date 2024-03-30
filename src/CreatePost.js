@@ -118,7 +118,7 @@ const CreatePost = () => {
 
           <div>
             <label
-              for="process"
+              htmlFor="process"
               className="block text-gray-700 text-sm font-medium mb- dark:text-zinc-100"
             >
               Describe your process:
@@ -136,7 +136,7 @@ const CreatePost = () => {
 
           <div>
             <label
-              for="hashtags"
+              htmlFor="hashtags"
               className="block text-gray-700 text-sm font-medium mb-2 dark:text-zinc-100"
             >
               Hashtags (comma-separated):
