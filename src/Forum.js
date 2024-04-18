@@ -37,7 +37,7 @@ const Forum = ({ isDarkMode }) => {
     <div
       className={`container mx-auto min-h-screen mt-12 p-6 dark:bg-gray-800`}
     >
-      {category && <h1 className="text-3xl font-bold text-center mt-6">{category.name}</h1>}
+      {category && <h1 className="text-3xl font-bold text-center mt-6 dark:text-zinc-200">{category.name}</h1>}
       <div className="text-center p-10 items-center ">
         <Link
           to={`../CreatePost/${categoryId}`}
