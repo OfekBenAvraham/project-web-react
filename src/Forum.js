@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 const Forum = ({ isDarkMode }) => {
   const { categoryId } = useParams();
   const [posts, setPosts] = useState([]);
-  // let category = null;
   const [category, setCategory] = useState(null);  // State to store the category object
 
 
@@ -17,9 +16,7 @@ const Forum = ({ isDarkMode }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // category = data;
         setCategory(data);
-        // console.log(category);
         fetch("https://project-web-psi.vercel.app/post/category/", {
           method: "POST",
           headers: {
