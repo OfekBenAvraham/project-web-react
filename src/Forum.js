@@ -4,7 +4,9 @@ import { Link, useParams } from "react-router-dom";
 const Forum = ({ isDarkMode }) => {
   const { categoryId } = useParams();
   const [posts, setPosts] = useState([]);
-  let category = null;
+  // let category = null;
+  const [category, setCategory] = useState(null);  // State to store the category object
+
 
   useEffect(() => {
     fetch(`https://project-web-psi.vercel.app/category/${categoryId}`, {
@@ -15,13 +17,15 @@ const Forum = ({ isDarkMode }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        category = data;
+        // category = data;
+        setCategory(data);
+        // console.log(category);
         fetch("https://project-web-psi.vercel.app/post/category/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name: category.name }),
+          body: JSON.stringify({ name: data.name }),
         })
           .then((response) => response.json())
           .then((data) => {
@@ -36,6 +40,7 @@ const Forum = ({ isDarkMode }) => {
     <div
       className={`container mx-auto min-h-screen mt-12 p-6 dark:bg-gray-800`}
     >
+      {category && <h1 className="text-3xl font-bold text-center mt-6">{category.name}</h1>}
       <div className="text-center p-10 items-center ">
         <Link
           to={`../CreatePost/${categoryId}`}
