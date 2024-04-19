@@ -1,12 +1,17 @@
 # MakerMingle
 
-# Development
+<div align="center">
+<img src="https://github.com/gpariente/project-web-react/blob/master/src/assets/MakermingleLogo.png" width="300" >
+  
+</div>
 
-run `git clone`
-`npm install`
-`npm run dev`
+## Development
 
-# Deploymnet
+ `git clone`  
+ `npm install`  
+ `npm run dev`  
+
+## Deploymnet
 
 The app is deployed using Vercel right here: https://project-web-react.vercel.app/
 
