@@ -19,7 +19,7 @@ const Navbar = ({
   };
 
   return (
-    <header className="sticky top-0  border-b border-slate-100 bg-white backdrop-blur-lg dark:bg-gray-600 ">
+    <header className="sticky top-0 z-40 border-b border-slate-100 bg-white backdrop-blur-lg dark:bg-gray-600 ">
       <nav className="mx-auto flex gap-8 px-6 transition-all duration-200 ease-in-out lg:px-12 py-4">
         <div className="relative flex items-center">
           <Link to="/">

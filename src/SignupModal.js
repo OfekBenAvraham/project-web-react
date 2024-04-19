@@ -33,7 +33,7 @@ const SignupModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-40 ">
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-center z-40 ">
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-96 min-h-[32rem] flex flex-col items-center justify-start relative dark:bg-gray-600">
         <span
           className="absolute top-4 right-8 cursor-pointer text-2xl text-gray-500 dark:text-zinc-100"
