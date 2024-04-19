@@ -7,6 +7,7 @@ const Navbar = ({
   isAuthenticated,
   onLogoutClick,
   onToggleDarkMode,
+  closeDialogs,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -14,13 +15,11 @@ const Navbar = ({
     setIsOpen(!isOpen);
   };
   const toggleDarkMode = () => {
-    console.log("dark mode toggle");
     onToggleDarkMode();
-    // document.documentElement.classList.toggle("dark");
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-100 bg-white backdrop-blur-lg dark:bg-gray-600 ">
+    <header className="sticky top-0  border-b border-slate-100 bg-white backdrop-blur-lg dark:bg-gray-600 ">
       <nav className="mx-auto flex gap-8 px-6 transition-all duration-200 ease-in-out lg:px-12 py-4">
         <div className="relative flex items-center">
           <Link to="/">
@@ -39,13 +38,19 @@ const Navbar = ({
           } items-center justify-end gap-6 md:flex flex-col md:flex-row`}
         >
           <li className="pt-1.5 font-dm text-sm font-medium text-slate-700  dark:text-slate-200">
-            <Link to={`/`}>Home</Link>
+            <Link to={`/`} onClick={closeDialogs}>
+              Home
+            </Link>
           </li>
           <li className="pt-1.5 font-dm text-sm font-medium text-slate-700  dark:text-slate-200">
-            <Link to={`/explore`}>Explore</Link>
+            <Link to={`/explore`} onClick={closeDialogs}>
+              Explore
+            </Link>
           </li>
           <li className="pt-1.5 font-dm text-sm font-medium text-slate-700  dark:text-slate-200">
-            <Link to={`/about`}>About</Link>
+            <Link to={`/about`} onClick={closeDialogs}>
+              About
+            </Link>
           </li>
           {!isAuthenticated && (
             <>

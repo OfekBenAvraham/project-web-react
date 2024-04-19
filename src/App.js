@@ -58,8 +58,18 @@ function App() {
     <BrowserRouter>
       <div className="App dark:bg-gray-800">
         <Navbar
-          onLoginClick={() => setIsLoginModalOpen(true)}
-          onSignupClick={() => setIsSignupModalOpen(true)}
+          onLoginClick={() => {
+            setIsLoginModalOpen(true);
+            setIsSignupModalOpen(false);
+          }}
+          onSignupClick={() => {
+            setIsLoginModalOpen(false);
+            setIsSignupModalOpen(true);
+          }}
+          closeDialogs={() => {
+            setIsLoginModalOpen(false);
+            setIsSignupModalOpen(false);
+          }}
           isAuthenticated={isAuthenticated}
           onLogoutClick={() => setIsAuthenticated(false)}
           isDarkMode={isDarkMode}
